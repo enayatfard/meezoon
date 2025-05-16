@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <div className="p-6"></div>
+      <div className="flex flex-col gap-4"></div>
     </>
   );
 }
