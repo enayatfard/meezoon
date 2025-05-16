@@ -2,27 +2,30 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils";
 
-const cardVariants = cva("rounded-lg border bg-white shadow-sm", {
-  variants: {
-    variant: {
-      default: "border-gray-200",
-      primary: "border-blue-200 bg-blue-50",
-      success: "border-green-200 bg-green-50",
-      warning: "border-yellow-200 bg-yellow-50",
-      error: "border-red-200 bg-red-50",
+const cardVariants = cva(
+  "rounded-[var(--radius-md)] border bg-[var(--color-background)] shadow-[var(--shadow-sm)]",
+  {
+    variants: {
+      variant: {
+        default: "border-[var(--color-border)]",
+        primary: "border-[var(--color-primary)] bg-[var(--color-primary)]/5",
+        success: "border-[var(--color-success)] bg-[var(--color-success)]/5",
+        warning: "border-[var(--color-warning)] bg-[var(--color-warning)]/5",
+        error: "border-[var(--color-error)] bg-[var(--color-error)]/5",
+      },
+      padding: {
+        none: "",
+        sm: "p-[var(--spacing-sm)]",
+        md: "p-[var(--spacing-md)]",
+        lg: "p-[var(--spacing-lg)]",
+      },
     },
-    padding: {
-      none: "",
-      sm: "p-3",
-      md: "p-4",
-      lg: "p-6",
+    defaultVariants: {
+      variant: "default",
+      padding: "md",
     },
-  },
-  defaultVariants: {
-    variant: "default",
-    padding: "md",
-  },
-});
+  }
+);
 
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -47,7 +50,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-4", className)}
+    className={cn("flex flex-col space-y-1.5 p-[var(--spacing-md)]", className)}
     {...props}
   />
 ));
@@ -60,7 +63,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      "text-lg font-semibold leading-none tracking-tight text-[var(--color-foreground)]",
       className
     )}
     {...props}
@@ -72,7 +75,11 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm text-gray-500", className)} {...props} />
+  <p
+    ref={ref}
+    className={cn("text-sm text-[var(--color-muted)]", className)}
+    {...props}
+  />
 ));
 CardDescription.displayName = "CardDescription";
 
@@ -80,7 +87,11 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-4 pt-0", className)} {...props} />
+  <div
+    ref={ref}
+    className={cn("p-[var(--spacing-md)] pt-0", className)}
+    {...props}
+  />
 ));
 CardContent.displayName = "CardContent";
 
@@ -90,7 +101,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-4 pt-0", className)}
+    className={cn("flex items-center p-[var(--spacing-md)] pt-0", className)}
     {...props}
   />
 ));
